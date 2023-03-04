@@ -1,9 +1,11 @@
 const express = require("express");
-const bodyParser = require('body-parser'); // used to parse the request body
+const bodyParser = require("body-parser"); // used to parse the request body
 const { randomBytes } = require("crypto");
+const cors = require("cors");
 
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors());
 
 const posts = {};
 
@@ -20,7 +22,7 @@ app.post("/posts", (req, res) => {
     title,
   };
 
-  res.status(201).send(posts[id])
+  res.status(201).send(posts[id]);
 });
 
 app.listen(4000, () => {
