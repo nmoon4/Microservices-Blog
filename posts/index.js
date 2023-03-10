@@ -34,7 +34,7 @@ app.post("/posts", async (req, res) => {
   res.status(201).send(posts[id]);
 });
 
-// This is when the posts service gets a post request from the event handler
+// This is when the posts service gets a POST request from the event handler
 app.post('/events', (req, res) => {
   console.log('Received Event', req.body.type)
 
