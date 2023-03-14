@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-depl
+spec:
+  replicas: 1
+  selector: # look for pods with the label of "app: event-bus"
+    matchLabels:
+      app: event-bus
+  template:
+    metadata:
+      labels: 
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: nmoon778/event-bus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec: # type: ClusterIP by default
+  selector: # selects the pods that will be allowed access to
+    app: event-bus
+  ports: 
+    - name: event-bus
+      protocol: TCP
+      port: 4005 # port of the Kubernetes node
+      targetPort: 4005 # port of the pod

@@ -14,4 +14,17 @@ spec:
     spec:
       containers:
         - name: posts
-          image: posts
+          image: nmoon778/posts
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec: # type: ClusterIP by default
+  selector: # selects the pods that will be allowed access to
+    app: posts
+  ports: 
+    - name: posts
+      protocol: TCP
+      port: 4000 # port of the Kubernetes node
+      targetPort: 4000 # port of the pod
