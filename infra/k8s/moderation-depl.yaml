@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1
+  selector: # look for pods with the label of "app: moderation"
+    matchLabels:
+      app: moderation
+  template:
+    metadata:
+      labels: 
+        app: moderation
+    spec:
+      containers:
+        - name: moderation
+          image: nmoon778/moderation
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-srv
+spec: # type: ClusterIP by default
+  selector: # selects the pods that will be allowed access to
+    app: moderation
+  ports: 
+    - name: moderation
+      protocol: TCP
+      port: 4003 # port of the Kubernetes node
+      targetPort: 4003 # port of the pod
