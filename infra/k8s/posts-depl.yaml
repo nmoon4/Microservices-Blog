@@ -19,7 +19,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-srv
+  name: posts-clusterip-srv # this name should be different from the posts NodePort service
 spec: # type: ClusterIP by default
   selector: # selects the pods that will be allowed access to
     app: posts
