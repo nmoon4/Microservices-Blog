@@ -1,3 +1,3 @@
 # Microservices-Blog
  
-This is a blog website created using microservices. Users can create posts and commment on posts. The post service and comment service are independent of each other, which means that even if one service goes down, the other can continue to work.
+This is a blog website created using microservices. Users can create posts and comment on posts. The main services are making posts, making comments, and displaying all posts and comments together. Each service is run in a Docker container and deployed using Kubernetes. 
