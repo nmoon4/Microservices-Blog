@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/* # tells Skaffold where all of the Kubernetes config files are
+build:
+  local:
+    push: false # disable auto push to dockerhub
+  artifacts:
+    - image: nmoon778/client
+      context: client # directory that skaffold should follow
+      docker:
+        dockerfile: Dockerfile
+      sync: # changes outside of 'manual:' will cause a image re-build
+        manual: 
+          - src: "src/**/*.js" # changes to these files will be copied over without re-building the image
+            dest: .
+    - image: nmoon778/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: nmoon778/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: nmoon778/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: nmoon778/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: nmoon778/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
