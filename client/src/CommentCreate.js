@@ -30,5 +30,4 @@ const CommentCreate = ({ postId }) => {
     </div>
   );
 };
-
 export default CommentCreate;
